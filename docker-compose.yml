@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: oplan-app
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "9000:9000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=oplan
+      - DB_USERNAME=oplan
+      - DB_PASSWORD=oplan123
+    depends_on:
+      - db
+    networks:
+      - oplan-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: oplan-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - oplan-network
+
+  db:
+    image: mysql:8.0
+    container_name: oplan-db
+    environment:
+      MYSQL_DATABASE: oplan
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_USER: oplan
+      MYSQL_PASSWORD: oplan123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - oplan-network
+
+volumes:
+  db-data:
+
+networks:
+  oplan-network:
+    driver: bridge
