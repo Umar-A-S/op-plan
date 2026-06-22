@@ -515,13 +515,82 @@ op-plan/
 
 ## 🚧 Planned Work (Next Phases)
 
-### Issue #6 - Frontend Views (Planned)
-- [ ] Create Blade templates for layouts
-- [ ] Implement Livewire components for interactivity
-- [ ] Build dashboard with metrics
-- [ ] Create CRUD views (list, create, edit, delete forms)
-- [ ] Implement authentication views (login, register, profile)
-- [ ] Add responsive design with Tailwind CSS
+### 📋 Issue #6 - Frontend Views (PLANNED)
+**Title:** Feature: Implement Core Frontend Views with Blade & Livewire  
+**Status:** 📋 Planned  
+**Objective:** Develop the foundational user interface for OPLAN, covering common layouts, authentication flows, dashboard, and basic CRUD views for managing resources, ensuring an interactive and responsive user experience.
+
+**Planning Document:**
+
+**Deliverables:**
+- ✅ **Base Layouts:** Create master Blade layouts for authenticated users and guest users.
+- ✅ **Authentication Views:** Implement Login, Register, Forgot Password, Reset Password, dan Profile pages using Laravel Breeze views.
+- ✅ **Dashboard View:** Develop a landing dashboard page for authenticated users, displaying an overview (e.g., summary statistics, quick links).
+- ✅ **Fleet Management Views:**
+    - [ ] `fleets.index`: Tampilan daftar semua armada dengan paginasi dan fitur pencarian/filter.
+    - [ ] `fleets.create`: Formulir untuk menambah armada baru.
+    - [ ] `fleets.show`: Tampilan detail armada.
+    - [ ] `fleets.edit`: Formulir untuk mengedit data armada.
+- ✅ **Driver Management Views:**
+    - [ ] `drivers.index`: Tampilan daftar semua driver dengan paginasi dan fitur pencarian/filter.
+    - [ ] `drivers.create`: Formulir untuk menambah driver baru.
+    - [ ] `drivers.show`: Tampilan detail driver.
+    - [ ] `drivers.edit`: Formulir untuk mengedit data driver.
+- ✅ **Delivery Order Management Views:**
+    - [ ] `delivery-orders.index`: Tampilan daftar semua pesanan pengiriman dengan paginasi dan fitur pencarian/filter.
+    - [ ] `delivery-orders.create`: Formulir untuk menambah pesanan baru.
+    - [ ] `delivery-orders.show`: Tampilan detail pesanan.
+    - [ ] `delivery-orders.edit`: Formulir untuk mengedit data pesanan.
+- ✅ **Driver's Own Order View:**
+    - [ ] `my-orders.index`: Tampilan daftar pesanan yang ditugaskan kepada driver yang sedang login.
+- ✅ **Livewire Components:** Integrate Livewire for interactive elements (e.g., real-time search, dynamic forms, status updates).
+- ✅ **Responsive Design:** Ensure all views are fully responsive using Tailwind CSS.
+- ✅ **Authorization on Frontend:** Implement frontend-level role/permission checks to show/hide UI elements.
+
+**Key Files to Create/Modify:**
+- `resources/views/layouts/app.blade.php` (Authenticated layout)
+- `resources/views/layouts/guest.blade.php` (Guest layout)
+- `resources/views/dashboard.blade.php`
+- `resources/views/fleets/index.blade.php`
+- `resources/views/fleets/create.blade.php`
+- `resources/views/fleets/show.blade.php`
+- `resources/views/fleets/edit.blade.php`
+- `resources/views/drivers/index.blade.php`
+- `resources/views/drivers/create.blade.php`
+- `resources/views/drivers/show.blade.php`
+- `resources/views/drivers/edit.blade.php`
+- `resources/views/delivery-orders/index.blade.php`
+- `resources/views/delivery-orders/create.blade.php`
+- `resources/views/delivery-orders/show.blade.php`
+- `resources/views/delivery-orders/edit.blade.php`
+- `resources/views/my-orders/index.blade.php`
+- `resources/js/app.js` (for Alpine.js / Livewire setup)
+- `resources/css/app.css` (Tailwind CSS)
+- `app/Livewire/*` (New Livewire components as needed)
+- `routes/web.php` (Update to render views)
+
+**Technology Stack (Frontend):**
+- **Template Engine:** Blade
+- **Interactivity:** Livewire 3 & Alpine.js
+- **CSS Framework:** Tailwind CSS
+- **Bundler:** Vite
+- **JavaScript:** Vanilla JS
+
+**User Stories:**
+- Sebagai **Admin Logistik**, saya dapat melihat, menambah, mengedit, dan menghapus data Armada, Driver, dan Pesanan Pengiriman.
+- Sebagai **Manajer**, saya dapat melihat dan menambah data Armada, Driver, dan Pesanan Pengiriman.
+- Sebagai **Driver**, saya dapat melihat daftar pesanan yang ditugaskan kepada saya dan memperbarui status pesanan tersebut.
+- Sebagai **Pengguna**, saya dapat login, logout, mendaftar, dan mengelola profil saya.
+
+**Acceptance Criteria:**
+- Semua view utama (Dashboard, CRUD resources, My Orders) dapat diakses sesuai peran pengguna.
+- Formulir penambahan/pengeditan data berfungsi dengan baik dan menampilkan validasi backend.
+- Data ditampilkan dengan paginasi yang berfungsi.
+- Desain responsif diimplementasikan untuk tampilan desktop dan mobile.
+- Interaksi UI (misalnya, pencarian real-time, update status) berfungsi menggunakan Livewire.
+- URL routing untuk semua halaman yang diperlukan sudah dikonfigurasi di `routes/web.php`.
+- View autentikasi (login, register, dll.) berfungsi dengan benar.
+- Elemen UI (tombol edit/hapus) tersembunyi atau dinonaktifkan jika pengguna tidak memiliki izin.
 
 ### Issue #7 - Operational Dashboard (Planned)
 - [ ] Real-time fleet tracking
