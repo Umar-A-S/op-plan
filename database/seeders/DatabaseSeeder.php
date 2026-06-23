@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             if (!$driver->user) {
                 $user = User::factory()->create([
                     'name' => $driver->name,
-                    'email' => strtolower(str_replace(' ', '.', $driver->name)) . '@driver.oplan.local',
+                    'email' => strtolower(str_replace(' ', '.', $driver->name)) . '.' . $driver->id . '@driver.oplan.local',
                     'password' => bcrypt('password'),
                     'driver_id' => $driver->id,
                 ]);

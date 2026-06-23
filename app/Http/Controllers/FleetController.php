@@ -11,40 +11,54 @@ class FleetController extends Controller
     public function index()
     {
         $fleets = Fleet::with('drivers', 'deliveryOrders')->paginate(15);
-        return response()->json(['data' => $fleets]);
+        if (request()->wantsJson()) {
+            return response()->json(['data' => $fleets]);
+        }
+        return view('fleets.index', compact('fleets'));
     }
 
     public function create()
     {
-        return response()->json(['message' => 'Create form']);
+        return view('fleets.create');
     }
 
     public function store(StoreFleetRequest $request)
     {
         $fleet = Fleet::create($request->validated());
-        return response()->json(['data' => $fleet, 'message' => 'Fleet created successfully'], 201);
+        if ($request->wantsJson()) {
+            return response()->json(['data' => $fleet, 'message' => 'Fleet created successfully'], 201);
+        }
+        return redirect()->route('fleets.index')->with('success', 'Armada berhasil ditambahkan.');
     }
 
     public function show(Fleet $fleet)
     {
-        $fleet->load('drivers', 'deliveryOrders');
-        return response()->json(['data' => $fleet]);
+        if (request()->wantsJson()) {
+            return response()->json(['data' => $fleet]);
+        }
+        return view('fleets.show', compact('fleet'));
     }
 
     public function edit(Fleet $fleet)
     {
-        return response()->json(['data' => $fleet, 'message' => 'Edit form']);
+        return view('fleets.edit', compact('fleet'));
     }
 
     public function update(UpdateFleetRequest $request, Fleet $fleet)
     {
         $fleet->update($request->validated());
-        return response()->json(['data' => $fleet, 'message' => 'Fleet updated successfully']);
+        if ($request->wantsJson()) {
+            return response()->json(['data' => $fleet, 'message' => 'Fleet updated successfully']);
+        }
+        return redirect()->route('fleets.index')->with('success', 'Armada berhasil diperbarui.');
     }
 
     public function destroy(Fleet $fleet)
     {
         $fleet->delete();
-        return response()->json(['message' => 'Fleet deleted successfully'], 200);
+        if (request()->wantsJson()) {
+            return response()->json(['message' => 'Fleet deleted successfully'], 200);
+        }
+        return redirect()->route('fleets.index')->with('success', 'Armada berhasil dihapus.');
     }
 }

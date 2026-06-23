@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fleet_id')->constrained();
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('license_number')->unique();
